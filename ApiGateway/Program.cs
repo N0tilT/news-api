@@ -16,6 +16,22 @@ app.MapHealthChecks("/healthz");
 
 //app.UseAuthentication();
 //app.UseAuthorization();
+var configuration = new OcelotPipelineConfiguration
+{
+    AuthenticationMiddleware = async (context, next) =>
+    {
+        await next.Invoke();
+    },
+    AuthorizationMiddleware= async (context, next) =>
+    {
+        await next.Invoke();
+    },
+    PreErrorResponderMiddleware = async (context, next) =>
+    {
+        await next.Invoke();
+    }
+};
+app.UseOcelot(configuration);
 await app.UseOcelot();
 
 app.Run();
