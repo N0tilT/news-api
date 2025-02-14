@@ -31,7 +31,6 @@ var configuration = new OcelotPipelineConfiguration
         await next.Invoke();
     }
 };
-app.UseOcelot(configuration);
-await app.UseOcelot();
+await app.UseOcelot(configuration);
 
 app.Run();
