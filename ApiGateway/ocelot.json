@@ -7,11 +7,11 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "apigateway",
-          "Port": 8080 
+          "Port": 8080
         }
       ],
       "DownstreamPathTemplate": "/api/topic"
-     },
+    },
 
     {
       "UpstreamPathTemplate": "/api/weather",
@@ -20,7 +20,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "weather",
-          "Port": 8080 
+          "Port": 8080
         }
       ],
       "DownstreamPathTemplate": "/api/weather"
