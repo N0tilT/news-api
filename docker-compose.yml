@@ -66,8 +66,8 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: "False"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-    # ports:
-    #   - "5050:80"
+    ports:
+      - "5050:80"
     restart: unless-stopped
     deploy:
       resources:
@@ -98,18 +98,31 @@ services:
       - backend
 
   weather:
+    container_name: weather-api
     image: ${DOCKER_REGISTRY-}weather
     build:
       context: .
-      dockerfile: Weather/Dockerfile
+      dockerfile: ./Weather/Dockerfile
+    networks:
+        - backend
 
   apigateway:
+    container_name: api-gateway
     image: ${DOCKER_REGISTRY-}apigateway
     build:
       context: .
-      dockerfile: ApiGateway/Dockerfile
+      dockerfile: ./ApiGateway/Dockerfile
+    depends_on:
+      newsapi:
+        condition: service_started
+        restart: true      
+      weather:
+        condition: service_started
+        restart: true
     ports:
     - "8080:8080"
+    networks:
+      - backend
 
 volumes:
   pgadmin-data:
