@@ -1,0 +1,107 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/api/topic",
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "gardenapi", ////???????????????????
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/plants",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": [
+          "Administrator",
+          "User"
+        ]
+      }
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/recognize",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "recognizeapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/recognize"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/search",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "recognizeapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/search"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/auth/login",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/auth/login"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/auth/register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/auth/register"
+    },
+
+    {
+      "UpstreamPathTemplate": "/api/auth/validate",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/auth/validate"
+    },
+
+    {
+      "UpstreamPathTemplate": "/healthz",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/health",
+      "DownstreamScheme": "http"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8080"
+  }
+}

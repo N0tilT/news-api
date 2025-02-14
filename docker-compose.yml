@@ -52,8 +52,8 @@ services:
         limits:
           cpus: '1'
           memory: 4G
-    ports:
-      - "5432:5432"
+    # ports:
+    #   - "5432:5432"
     networks:
       - postgres
       - backend
@@ -66,8 +66,8 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: "False"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-    ports:
-      - "5050:80"
+    # ports:
+    #   - "5050:80"
     restart: unless-stopped
     deploy:
       resources:
@@ -92,8 +92,8 @@ services:
       postgres:
         condition: service_healthy
         restart: true
-    ports:
-      - "8080:8080"
+    # ports:
+    #   - "8080:8080"
     networks:
       - backend
 
@@ -102,6 +102,14 @@ services:
     build:
       context: .
       dockerfile: Weather/Dockerfile
+
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+    - "8080:8080"
 
 volumes:
   pgadmin-data:
@@ -112,3 +120,4 @@ networks:
     driver: bridge
   backend:
     driver: bridge
+
