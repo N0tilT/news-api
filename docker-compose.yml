@@ -101,7 +101,7 @@ services:
       context: ./news-client 
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3000:5173"
     environment:
       VITE_API_URL: "http://newsapi:8080"
     depends_on:
