@@ -11,9 +11,9 @@ namespace NewsAPI.Controllers
         private TopicService _service { get; } = service;
 
         [HttpGet]
-        public async Task<ActionResult<TopicDTO>> Get([FromBody] List<int> ids)
+        public async Task<ActionResult<TopicDTO>> Get()
         {
-            var topic =(await _service.Get(_service._dataContext.Topics, ids))
+            var topic =(await _service.Get(_service._dataContext.Topics, []))
                 .Select(x => x.ToDTO())
                 .ToList();
 

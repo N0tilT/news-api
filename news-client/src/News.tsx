@@ -15,12 +15,10 @@ const News = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL;
-        if (!apiUrl) {
-          throw new Error('API URL is not defined in environment variables');
-        }
 
-        const response = await fetch(`${apiUrl}/api/topic`);
+        const response = await fetch(`/api/topic`,{
+            method:"GET",
+        });
         
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
