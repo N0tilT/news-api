@@ -96,6 +96,20 @@ services:
       - "8080:8080"
     networks:
       - backend
+      
+  frontend:
+    container_name: react-app
+    build:
+      context: ./news-client 
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_URL: "http://newsapi:8080"
+    depends_on:
+      - newsapi
+    networks:
+      - backend
 
 volumes:
   pgadmin-data:
