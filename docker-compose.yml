@@ -92,11 +92,9 @@ services:
       postgres:
         condition: service_healthy
         restart: true
-    ports:
-      - "8080:8080"
     networks:
       - backend
-      
+
   frontend:
     container_name: react-app
     build:
